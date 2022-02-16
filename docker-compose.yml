@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  app:
+    build: ./
+    environment:
+      REDIS_HOST: "redis"
+      CHECK_FIELD_EXISTS: "field.child_a.child_b"
+    depends_on:
+      - redis
+    networks:
+      - appnet
+    ports:
+      - "5000"
+
+  redis:
+    image: "redis"
+    networks:
+      - appnet
+
+networks:
+  appnet:
